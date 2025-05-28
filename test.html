@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .info {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Information</h1>
+  <div class="info"><strong>IP Address:</strong> <span id="ip">Loading...</span></div>
+  <div class="info"><strong>Browser:</strong> <span id="browser">Loading...</span></div>
+
+  <script>
+   
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('ip').textContent = data.ip;
+      })
+      .catch(() => {
+        document.getElementById('ip').textContent = 'Unable to fetch IP.';
+      });
+
+    const userAgent = navigator.userAgent;
+    document.getElementById('browser').textContent = userAgent;
+  </script>
+</body>
+</html>
